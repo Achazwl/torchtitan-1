@@ -12,8 +12,8 @@ from torch._functorch.aot_autograd import aot_compile_joint_with_descriptors
 from torch._guards import tracing
 
 from torch.distributed.tensor import DTensor, Replicate
-
 from torch.fx.traceback import annotate_fn
+from torch.nn.attention.flex_attention import BlockMask
 from torch.utils._pytree import tree_map
 from torchtitan.config import JobConfig
 from torchtitan.distributed import ParallelDims
@@ -82,7 +82,7 @@ def parallelize_inputs(world_mesh, args, kwargs):
         return tensor
 
     dt_args = tree_map(to_dtensor, args)
-    dt_kwargs = tree_map(to_dtensor, kwargs)
+    dt_kwargs = tree_map(to_dtensor, kwargs, is_leaf=lambda v: isinstance(v, BlockMask))
 
     return dt_args, dt_kwargs
 

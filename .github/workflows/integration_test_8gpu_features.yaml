@@ -50,3 +50,4 @@ jobs:
 
         mkdir artifacts-to-be-uploaded
         python -m tests.integration_tests.run_tests --test_suite features artifacts-to-be-uploaded --ngpu 8
+        rm -rf artifacts-to-be-uploaded/*/checkpoint

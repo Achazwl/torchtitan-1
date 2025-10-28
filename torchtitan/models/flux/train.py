@@ -36,7 +36,7 @@ class FluxTrainer(Trainer):
             self.device,
             job_config.training.seed,
             job_config.training.deterministic,
-            distinct_seed_mesh_dim="dp_shard",
+            distinct_seed_mesh_dims=["dp_shard", "dp_replicate"],
         )
 
         # NOTE: self._dtype is the data type used for encoders (image encoder, T5 text encoder, CLIP text encoder).

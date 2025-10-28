@@ -7,6 +7,7 @@
 import argparse
 import os
 import subprocess
+import time
 
 from torchtitan.tools.logging import logger
 
@@ -50,7 +51,7 @@ def run_single_test(test_flavor: OverrideDefinitions, full_path: str, output_dir
         if override_arg:
             cmd += " " + " ".join(override_arg)
         logger.info(
-            f"=====Integration test, flavor : {test_flavor.test_descr}, command : {cmd}====="
+            f"===== {time.strftime('%Y-%m-%d %H:%M:%S')} Integration test, flavor : {test_flavor.test_descr}, command : {cmd}====="
         )
 
         # save checkpoint (idx == 0) and load it for generation (idx == 1)

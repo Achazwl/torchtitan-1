@@ -14,5 +14,10 @@ class Compile:
 
 
 @dataclass
+class Parallelism:
+    simple_fsdp_reshard_after_forward: Literal["always", "never"] = "always"
+
+
+@dataclass
 class JobConfig:
     compile: Compile = field(default_factory=Compile)
